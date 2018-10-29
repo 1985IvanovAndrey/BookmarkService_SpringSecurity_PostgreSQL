@@ -37,7 +37,7 @@
         </h2>
     </c:if>
     <div class="col-4">
-        <form:form action="/users" class="form-signin">
+        <form:form action="/users" class="form-signin" method="get">
             <button class="btn btn-lg btn-primary btn-lg" type="submit">Page only for Admin</button>
         </form:form>
         <br>

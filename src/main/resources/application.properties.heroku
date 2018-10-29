@@ -1,0 +1,27 @@
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://ec2-54-217-235-137.eu-west-1.compute.amazonaws.com:5432/da007744oo6j0l?sslmode=require
+spring.datasource.username=gecrouuynxlfle
+spring.datasource.password=de7c2c91744bbfbcbc4dfd5f5beaaeb90d07a4cb059432b6c9076757d18077b1
+
+#Hibernate Configuration:
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+packagesToScan=com.base.login.spring.mvc.dao.model
+
+
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
+
+
+spring.datasource.initialization-mode=always
+hibernate.show_sql = true
+#hibernate.generate_statistics=true
+#hibernate.format_sql=true
+spring.jpa.show-sql=false
+spring.jpa.generate-ddl=true
+
+
+#hibernate.enable_lazy_load_no_trans = true
+#hibernate.connection.Charset = UTF-8
+#hibernate.connection.CharacterEncoding = UTF-8
+#hibernate.connection.UseUnicode = true
