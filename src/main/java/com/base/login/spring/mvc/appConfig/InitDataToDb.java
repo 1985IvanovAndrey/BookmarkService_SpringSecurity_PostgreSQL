@@ -53,25 +53,25 @@ public class InitDataToDb {
         userInfo.setRoles(roles);
         userRepository.save(userInfo);
 
-//        Groups group=new Groups();
-//        Bookmark bookmark=new Bookmark();
-//        bookmark.setBookmark("main");
-//        bookmark.setDescription("111");
-//        bookmark.setUrlBookmark("i.ua");
-//        bookmarkRepository.save(bookmark);
-//        ArrayList<Bookmark>bookmarkList=new ArrayList<>();
-//        bookmarkList.add(bookmark);
-//        group.setNameGroup("first");
-//        group.setBookmarks(bookmarkList);
-//       // groupsRepository.save(group);
-//        UserInfo userInfo1=new UserInfo();
-//        userInfo1.setUsername("test");
-//        Set<Role> roles1 = new HashSet<>(Collections.singleton(role2));
-//        userInfo1.setRoles(roles1);
-//        ArrayList<Groups>groupsArrayList=new ArrayList<>();
-//        groupsArrayList.add(group);
-//        //userInfo1.getGroupsSet(groupsArrayList);
-//        userRepository.save(userInfo1);
+// //        Groups group=new Groups();
+// //        Bookmark bookmark=new Bookmark();
+// //        bookmark.setBookmark("main");
+// //        bookmark.setDescription("111");
+// //        bookmark.setUrlBookmark("i.ua");
+// //        bookmarkRepository.save(bookmark);
+// //        ArrayList<Bookmark>bookmarkList=new ArrayList<>();
+// //        bookmarkList.add(bookmark);
+// //        group.setNameGroup("first");
+// //        group.setBookmarks(bookmarkList);
+// //       // groupsRepository.save(group);
+// //        UserInfo userInfo1=new UserInfo();
+// //        userInfo1.setUsername("test");
+// //        Set<Role> roles1 = new HashSet<>(Collections.singleton(role2));
+// //        userInfo1.setRoles(roles1);
+// //        ArrayList<Groups>groupsArrayList=new ArrayList<>();
+// //        groupsArrayList.add(group);
+// //        //userInfo1.getGroupsSet(groupsArrayList);
+// //        userRepository.save(userInfo1);
 
-    }
-}
+//     }
+// }
