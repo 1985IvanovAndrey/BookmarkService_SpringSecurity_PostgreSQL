@@ -35,7 +35,7 @@ public class StartController {
         model.addAttribute("groupsForUser",groupDao.getGroupsForUser());
         message = null;
         name = null;
-        //bookmarks=null;
+        bookmarks=null;
         return "index";
     }
 
@@ -111,8 +111,9 @@ public class StartController {
     @RequestMapping("/getBookmarksFromOneGroup/{id}")
     public String getBookmarksFromOneGroup(@PathVariable("id") int id) {
         idik = id;
-        List<Bookmark> bookmarkList = groupDao.getBookmarksfromOneGroup(idik);
-        bookmarks = bookmarkList;
+//        List<Bookmark> bookmarkList = groupDao.getBookmarksfromOneGroup(idik);
+//        bookmarks = bookmarkList;
+        bookmarks=groupDao.getBookmarksfromOneGroup(idik);
         nameGroup = groupDao.getById(id).getNameGroup();
         return "redirect:/test";
     }

@@ -1,6 +1,8 @@
 package com.base.login.spring.mvc.dao.model;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,12 +19,12 @@ public class Groups {
     @Column
     private String nameGroup;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id")
     private List<Bookmark> bookmarks;
 
-
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")
     private UserInfo userInfo;
 

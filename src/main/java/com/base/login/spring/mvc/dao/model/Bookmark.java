@@ -2,6 +2,8 @@ package com.base.login.spring.mvc.dao.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -24,6 +26,10 @@ public class Bookmark {
 
     @Column
     private String description;
+
+//    @ManyToOne()
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private Groups group;
 
     public Bookmark(String bookmark) {
         this.bookmark = bookmark;

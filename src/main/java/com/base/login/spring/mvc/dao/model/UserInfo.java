@@ -83,13 +83,8 @@ public class UserInfo {
         this.roles = roles;
     }
 
-
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//    private List<Groups> groupsSet = new ArrayList<>();
-//
-//    public List<Groups> getGroupsSet() {
-//        return groupsSet;
-//    }
+//    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+//    private List<Groups> groupsSet;
 //
 //    public void setGroupsSet(List<Groups> groupsSet) {
 //        this.groupsSet = groupsSet;
@@ -104,4 +99,10 @@ public class UserInfo {
     public UserInfo() {
     }
 
+//    public UserInfo(String username, String password, Set<Role> roles, List<Groups> groupsSet) {
+//        this.username = username;
+//        this.password = password;
+//        this.roles = roles;
+//        this.groupsSet = groupsSet;
+//    }
 }

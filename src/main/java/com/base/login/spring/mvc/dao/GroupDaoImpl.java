@@ -6,6 +6,7 @@ import com.base.login.spring.mvc.dao.model.UserInfo;
 import com.base.login.spring.mvc.dao.repository.BookmarkRepository;
 import com.base.login.spring.mvc.dao.repository.GroupsRepository;
 import com.base.login.spring.mvc.dao.repository.UserRepository;
+import com.base.login.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,75 +24,54 @@ import java.util.regex.Pattern;
 @Repository
 public class GroupDaoImpl implements GroupDao {
 
-    //    @Autowired
-//    private SessionFactory sessionFactory;
     @Autowired
     private GroupsRepository groupsRepository;
     @Autowired
     private BookmarkRepository bookmarkRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
 
     @Override
     public List<Groups> listGroup() {
-//        Session session = sessionFactory.getCurrentSession();
-//        List<Groups> listGroup = session.createQuery("from Groups").list();
-//        return listGroup;
         return groupsRepository.findAll();
     }
 
     @Override
     public void addGroup(Groups group) {
-//        Session session = sessionFactory.getCurrentSession();
-//        session.saveOrUpdate(group);
-        UserInfo userInfo = new UserInfo();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        for (UserInfo user : userRepository.findAll()) {
-            if (user.getUsername().equals(authentication.getName())) {
-                userInfo.setId(user.getId());
-            }
-        }
+        Authentication aut = SecurityContextHolder.getContext().getAuthentication();
+        UserInfo userInfo = userService.findByUsername(aut.getName());
         group.setUserInfo(userInfo);
-        groupsRepository.save(group);
-
+        groupsRepository.saveAndFlush(group);
     }
 
     @Override
     public void deleteGroup(int id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        Groups group = (Groups) session.load(Groups.class, new Integer(id));
-//        if (group != null) {
-//            session.delete(group);
-//        }
         groupsRepository.deleteById(id);
     }
+
     @Override
     public void deleteBookmark(int id) {
         bookmarkRepository.deleteById(id);
     }
+
     @Override
     public Groups getById(int id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        Groups group = (Groups) session.get(Groups.class, new Integer(id));
-        //System.out.println(group);
-//        return group;
         return groupsRepository.findById(id);
     }
 
     @Override
     public List<Bookmark> listBookmark() {
-//        Session session = sessionFactory.getCurrentSession();
-//        List<Bookmark> listBookmark = session.createQuery("from Bookmark").list();
-//        return listBookmark;
         return bookmarkRepository.findAll();
     }
 
     @Override
     public void addBookmark(Bookmark bookmark, int id) {
-        List<Groups> groups = new ArrayList<>();
+        List<Groups> groups = listGroup();
         List<Bookmark> bookmarkList = new ArrayList<>();
-        groups = listGroup();
+        //groups = listGroup();
         for (int i = 0; i < groups.size(); i++) {
             if (groups.get(i).getId() == id) {
                 System.out.println("Good" + i);
@@ -124,22 +104,9 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public boolean checkNewGroupOnDublicate(Groups group) {
-        int userId = 0;
-        List<Groups> groupsList = new ArrayList<>();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        for (UserInfo user : userRepository.findAll()) {
-            if (user.getUsername().equals(authentication.getName())) {
-                userId = user.getId();
-            }
-        }
-
         boolean chech = false;
-        //List<Groups> groupsList = listGroup();
-        for (Groups groups : groupsRepository.findAll()) {
-            if (userId == groups.getUserInfo().getId()) {
-                groupsList.add(groups);
-            }
-        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<Groups> groupsList = groupsRepository.findAllByUserInfo_Username(authentication.getName());
         for (Groups groups : groupsList) {
             if (groups.getNameGroup().equals(group.getNameGroup())) {
                 chech = true;
@@ -161,19 +128,8 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public List<Groups> getGroupsForUser() {
-        int userId = 0;
-        List<Groups> groupsList = new ArrayList<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        for (UserInfo user : userRepository.findAll()) {
-            if (user.getUsername().equals(authentication.getName())) {
-                userId = user.getId();
-            }
-        }
-        for (Groups groups : groupsRepository.findAll()) {
-            if (userId == groups.getUserInfo().getId()) {
-                groupsList.add(groups);
-            }
-        }
+        List<Groups> groupsList = groupsRepository.findAllByUserInfo_Username(authentication.getName());
         return groupsList;
     }
 }

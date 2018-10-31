@@ -1,8 +1,6 @@
 package com.base.login.spring.mvc.appConfig;//package service.bookmark.config;
 
 
-import com.base.login.spring.mvc.dao.model.Bookmark;
-import com.base.login.spring.mvc.dao.model.Groups;
 import com.base.login.spring.mvc.dao.model.Role;
 import com.base.login.spring.mvc.dao.model.UserInfo;
 import com.base.login.spring.mvc.dao.repository.BookmarkRepository;

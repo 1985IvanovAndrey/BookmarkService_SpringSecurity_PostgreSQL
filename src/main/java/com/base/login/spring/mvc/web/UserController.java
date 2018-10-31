@@ -112,24 +112,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "remove/{id}", method = RequestMethod.GET)
-    public String deleteUser(Model model, @PathVariable("id") Integer id) {
+    public String deleteUser(Model model, @PathVariable("id") int id) {
         userService.delUser(id);
+        System.out.println(id);
         model.addAttribute("userList", userService.userList());
         return "users";
-    }
-
-    @RequestMapping(value = "/first", method = RequestMethod.GET)
-    public String getFirst() {
-        return "first";
-    }
-
-    @RequestMapping(value = "/second", method = RequestMethod.GET)
-    public String getSecond() {
-        return "second";
-    }
-
-    @RequestMapping(value = "/third", method = RequestMethod.GET)
-    public String getThird() {
-        return "third";
     }
 }
