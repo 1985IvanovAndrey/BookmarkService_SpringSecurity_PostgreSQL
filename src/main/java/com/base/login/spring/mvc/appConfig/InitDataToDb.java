@@ -73,5 +73,5 @@ public class InitDataToDb {
 // //        //userInfo1.getGroupsSet(groupsArrayList);
 // //        userRepository.save(userInfo1);
 
-//     }
-// }
+    }
+ }
