@@ -23,6 +23,7 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
 <div class="col-4">
+
     <form action="/test/add">
         <div class="form-group">
             <label for="group" class="col-form-label-sm"><h4>Create new group:</h4></label>
@@ -31,6 +32,7 @@
         </div>
         <input class=" btn btn-outline-primary btn-sm" type="submit" value="Add group">
     </form>
+
     <c:if test="${not empty name}">
         <h4><font color="red"> Неверно указано название ${name}!!!</font></h4>
     </c:if>

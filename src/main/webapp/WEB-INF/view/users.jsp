@@ -18,7 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-    <%--<link href="${contextPath}/resources/css/bootstrap.min1.css" rel="stylesheet">--%>
+    <%--<link href="${contextPath}/resources/css/bootstrap1.min.css" rel="stylesheet">--%>
 
     <title>BookmarkService</title>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
