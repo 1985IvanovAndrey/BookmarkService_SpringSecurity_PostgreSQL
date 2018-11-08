@@ -51,10 +51,11 @@
             <c:when test="${userRole=='user'}">
                 <script>
                     $(document).ready(function () {
-                        $("#one").attr('disabled', 'disable');{
+                        $("#one").click(function () {
+
                             $("p").hide(1000);
                             alert("This button is for Admin only! You are not admin!");
-                        };
+                        });
                     });
                 </script>
             </c:when>
