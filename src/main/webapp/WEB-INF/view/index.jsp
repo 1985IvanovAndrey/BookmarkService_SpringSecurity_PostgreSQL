@@ -39,26 +39,10 @@
     <c:if test="${not empty message}">
         <h4><font color="red">${message}!!!</font></h4>
     </c:if>
-    <%--<c:if test="${!empty listGroup}">--%>
-    <%--<h4>Groups:</h4>--%>
-    <%--&lt;%&ndash;<div class="col-4">&ndash;%&gt;--%>
-        <%--<div class="table-responsive-sm">--%>
-            <%--<table class="table table-sm table-bordered">--%>
-                <%--<c:forEach items="${listGroup}" var="group">--%>
-                    <%--<tr align="center">--%>
-                        <%--<td>${group.nameGroup}</td>--%>
-                        <%--<td><a href="<c:url value='/test/remove/${group.id}'/>">del</a></td>--%>
-                        <%--<td><a href="<c:url value='/test/addInGroup/${group.id}'/>">+</a></td>--%>
-                        <%--<td><a href="<c:url value='/test/getBookmarksFromOneGroup/${group.id}'/>">show</a></td>--%>
-                    <%--</tr>--%>
-                <%--</c:forEach>--%>
-            <%--</table>--%>
-            <%--</c:if>--%>
-        <%--</div>--%>
-    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+
     <c:if test="${!empty groupsForUser}">
     <h4>Groups:</h4>
-        <%--<div class="col-4">--%>
+
     <div class="table-responsive-sm">
         <table class="table table-sm table-bordered">
             <c:forEach items="${groupsForUser}" var="group">
@@ -72,7 +56,7 @@
         </table>
         </c:if>
     </div>
-    <%--</div>--%>
+
 
     <c:if test="${!empty listBookmarks}">
         <h5> Print bookmarks group "${nameGroup}"</h5>

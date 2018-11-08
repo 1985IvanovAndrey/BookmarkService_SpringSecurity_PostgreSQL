@@ -30,7 +30,7 @@
 
                 <input name="username" type="email" class="form-control" placeholder="Email" required=""
                        autofocus="true"/>
-            
+
             </div>
             <div>
 

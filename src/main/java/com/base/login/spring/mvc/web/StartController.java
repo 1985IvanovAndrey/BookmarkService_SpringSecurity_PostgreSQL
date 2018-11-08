@@ -3,40 +3,52 @@ package com.base.login.spring.mvc.web;
 import com.base.login.spring.mvc.dao.GroupDao;
 import com.base.login.spring.mvc.dao.model.Bookmark;
 import com.base.login.spring.mvc.dao.model.Groups;
+import com.base.login.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 @RequestMapping("/test")
 public class StartController {
-    int idik;
-    List<Bookmark> bookmarks;
-    String nameGroup;
-    String name;
-    String message;
-
 
     @Autowired
     private GroupDao groupDao;
+    @Autowired
+    private UserService userService;
 
-   @GetMapping
+    int idik;
+    List<Bookmark> bookmarks;
+    List<Bookmark> bookmarkSearch;
+    String nameGroup;
+    String name;
+    String message;
+    int idUser;
+
+
+    @GetMapping
     public String getAllGroups(Model model) {
-        model.addAttribute("listGroup", groupDao.listGroup());
-        model.addAttribute("listBookmarks", bookmarks);
+        if (idUser == userService.getIdFromUser()) {
+            model.addAttribute("listBookmarks", groupDao.getBookmarksfromOneGroup(idik));
+        }
+        model.addAttribute("userList", userService.userList());
         model.addAttribute("nameGroup", nameGroup);
         model.addAttribute("name", name);
         model.addAttribute("message", message);
-        model.addAttribute("groupsForUser",groupDao.getGroupsForUser());
+        model.addAttribute("groupsForUser", groupDao.getGroupsForUser());
+        model.addAttribute("bookmarkForSearch", bookmarkSearch);
+        model.addAttribute("userRole", userService.getRoleByUser());
+        bookmarkSearch = null;
         message = null;
         name = null;
-        bookmarks=null;
-        return "index";
+        //bookmarks = null;
+
+        return "index_test";
     }
 
     @RequestMapping("/add")
@@ -66,6 +78,7 @@ public class StartController {
         bookmarks = null;
         return "redirect:/test";
     }
+
     @RequestMapping("/removeBookmark/{id}")
     public String deleteBookmark(@PathVariable("id") int id) {
         groupDao.deleteBookmark(id);
@@ -73,6 +86,7 @@ public class StartController {
         bookmarks = groupDao.getBookmarksfromOneGroup(idik);
         return "redirect:/test";
     }
+
     @RequestMapping("/addInGroup/{id}")
     public String addBookmarkInGroup(@PathVariable("id") int id, Model model) {
         idik = id;
@@ -102,7 +116,7 @@ public class StartController {
 
         } else {
             groupDao.addBookmark(bookmark, idik);
-            model.addAttribute("addBookmark","Bookmark added to group "+"\""+groupDao.getById(idik).getNameGroup()+"\""+"!!!!");
+            model.addAttribute("addBookmark", "Bookmark added to group " + "\"" + groupDao.getById(idik).getNameGroup() + "\"" + "!!!!");
             return "addBookmark";
         }
     }
@@ -110,16 +124,25 @@ public class StartController {
 
     @RequestMapping("/getBookmarksFromOneGroup/{id}")
     public String getBookmarksFromOneGroup(@PathVariable("id") int id) {
+        idUser = userService.getIdFromUser();
         idik = id;
 //        List<Bookmark> bookmarkList = groupDao.getBookmarksfromOneGroup(idik);
 //        bookmarks = bookmarkList;
-        bookmarks=groupDao.getBookmarksfromOneGroup(idik);
+        bookmarks = groupDao.getBookmarksfromOneGroup(idik);
         nameGroup = groupDao.getById(id).getNameGroup();
         return "redirect:/test";
     }
 
     @RequestMapping("/getHome")
-    public String getHome(){
+    public String getHome() {
         return "redirect:/test";
     }
+
+    @RequestMapping("/search")
+    public String searchByName(@RequestParam String name, Model model) {
+//        model.addAttribute("bookmarkForSearch",groupDao.getBookmarkForSearch(name));
+        bookmarkSearch = groupDao.getBookmarkForSearch(name);
+        return "redirect:/test";
+    }
+
 }

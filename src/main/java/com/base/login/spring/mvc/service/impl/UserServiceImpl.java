@@ -1,7 +1,6 @@
 package com.base.login.spring.mvc.service.impl;
 
 
-
 import com.base.login.spring.mvc.dao.model.Bookmark;
 import com.base.login.spring.mvc.dao.model.Groups;
 import com.base.login.spring.mvc.dao.model.Role;
@@ -12,6 +11,9 @@ import com.base.login.spring.mvc.dao.repository.RoleRepository;
 import com.base.login.spring.mvc.dao.repository.UserRepository;
 import com.base.login.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,9 +68,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delUser(int id) {
-        UserInfo userInfo=userRepository.findById(id);
-        List<Groups>groupsList=groupsRepository.findAllByUserInfo(userInfo);
-        List<Bookmark>bookmarkList=new ArrayList<>();
+        UserInfo userInfo = userRepository.findById(id);
+        List<Groups> groupsList = groupsRepository.findAllByUserInfo(userInfo);
+        List<Bookmark> bookmarkList = new ArrayList<>();
         for (Groups groups : groupsList) {
             for (Bookmark bookmark : groups.getBookmarks()) {
                 bookmarkList.add(bookmark);
@@ -79,4 +81,31 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.deleteById(id);
     }
+
+    @Override
+    public int getIdFromUser() {
+        int id = 0;
+        List<UserInfo> userList = userRepository.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        for (UserInfo userInfo : userList) {
+            if (userInfo.getUsername().equals(authentication.getName())) {
+                id = userInfo.getId();
+            }
+        }
+        System.out.println(id);
+        return id;
+    }
+
+    @Override
+    public String getRoleByUser() {
+        String roleUser=null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
+            roleUser=grantedAuthority.getAuthority();
+        }
+        System.out.println(roleUser+"++++++++");
+        return roleUser;
+
+    }
 }
+

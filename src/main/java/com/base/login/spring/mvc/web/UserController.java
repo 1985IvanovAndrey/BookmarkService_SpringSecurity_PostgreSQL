@@ -1,5 +1,6 @@
 package com.base.login.spring.mvc.web;
 
+import com.base.login.spring.mvc.dao.GroupDao;
 import com.base.login.spring.mvc.dao.model.UserInfo;
 import com.base.login.spring.mvc.dao.repository.UserRepository;
 import com.base.login.spring.mvc.service.SecurityService;
@@ -34,6 +35,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private GroupDao groupDao;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -75,7 +78,7 @@ public class UserController {
             userInfoForm.setUsername(str);
             userService.save(userInfoForm);
             securityService.autologin(userInfoForm.getUsername(), userInfoForm.getPasswordConfirm());
-            return "redirect:/welcome";
+            return "redirect:/test";
         }
 //        userService.save(userInfoForm);
 //        securityService.autologin(userInfoForm.getUsername(), userInfoForm.getPasswordConfirm());
@@ -102,7 +105,8 @@ public class UserController {
                 System.out.println(info.getId());
             }
         }
-        return "welcome";
+        groupDao.listBookmark().clear();
+        return "index_test";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)

@@ -132,5 +132,19 @@ public class GroupDaoImpl implements GroupDao {
         List<Groups> groupsList = groupsRepository.findAllByUserInfo_Username(authentication.getName());
         return groupsList;
     }
+@Override
+    public List<Bookmark> getBookmarkForSearch(String name) {
+        List<Bookmark> bookmarkList = new ArrayList<>();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<Groups> groupsList = groupsRepository.findAllByUserInfo_Username(authentication.getName());
+        for (Groups groups : groupsList) {
+            for (Bookmark bookmark : groups.getBookmarks()) {
+                if (bookmark.getBookmark().toLowerCase().equals(name.toLowerCase())) {
+                    bookmarkList.add(bookmark);
+                }
+            }
+        }
+        return bookmarkList;
+    }
 }
 
