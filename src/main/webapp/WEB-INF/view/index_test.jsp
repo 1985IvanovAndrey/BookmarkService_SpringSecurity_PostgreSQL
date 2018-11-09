@@ -72,7 +72,7 @@
         </c:choose>
 
 
-        <a class="navbar-brand">111111</a>
+        <a class="navbar-brand">      </a>
         <form action="/users">
             <button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>
         </form>
