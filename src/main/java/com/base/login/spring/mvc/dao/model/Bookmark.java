@@ -27,10 +27,6 @@ public class Bookmark {
     @Column
     private String description;
 
-//    @ManyToOne()
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    private Groups group;
-
     public Bookmark(String bookmark) {
         this.bookmark = bookmark;
     }

@@ -22,7 +22,8 @@ public class StartController {
     @Autowired
     private UserService userService;
 
-    int idik;
+    int idGroup;
+    int idGroupForAdd;
     List<Bookmark> bookmarks;
     List<Bookmark> bookmarkSearch;
     String nameGroup;
@@ -33,8 +34,9 @@ public class StartController {
 
     @GetMapping
     public String getAllGroups(Model model) {
+      
         if (idUser == userService.getIdFromUser()) {
-            model.addAttribute("listBookmarks", groupDao.getBookmarksfromOneGroup(idik));
+            model.addAttribute("listBookmarks", groupDao.getBookmarksfromOneGroup(idGroup));
         }
         model.addAttribute("userList", userService.userList());
         model.addAttribute("nameGroup", nameGroup);
@@ -46,8 +48,6 @@ public class StartController {
         bookmarkSearch = null;
         message = null;
         name = null;
-        //bookmarks = null;
-
         return "index_test";
     }
 
@@ -61,7 +61,6 @@ public class StartController {
         if (group.getNameGroup() == null) {
             name = "group";
             count++;
-
         }
         if (count > 0) {
             return "redirect:/test";
@@ -83,20 +82,20 @@ public class StartController {
     public String deleteBookmark(@PathVariable("id") int id) {
         groupDao.deleteBookmark(id);
         System.out.println(id);
-        bookmarks = groupDao.getBookmarksfromOneGroup(idik);
+        bookmarks = groupDao.getBookmarksfromOneGroup(idGroup);
         return "redirect:/test";
     }
 
     @RequestMapping("/addInGroup/{id}")
     public String addBookmarkInGroup(@PathVariable("id") int id, Model model) {
-        idik = id;
+        idGroupForAdd = id;
         model.addAttribute("nameGroup1", groupDao.getById(id).getNameGroup());
         return "addBookmark";
     }
 
     @RequestMapping("/addBookmark")
     public String addBookmark(@ModelAttribute("bookmark") Bookmark bookmark, Model model) {
-        model.addAttribute("nameGroup1", groupDao.getById(idik).getNameGroup());
+        model.addAttribute("nameGroup1", groupDao.getById(idGroupForAdd).getNameGroup());
         System.out.println(bookmark);
         int count = 0;
         if (bookmark.getBookmark() == "") {
@@ -115,8 +114,8 @@ public class StartController {
             return "addBookmark";
 
         } else {
-            groupDao.addBookmark(bookmark, idik);
-            model.addAttribute("addBookmark", "Bookmark added to group " + "\"" + groupDao.getById(idik).getNameGroup() + "\"" + "!!!!");
+            groupDao.addBookmark(bookmark, idGroupForAdd);
+            model.addAttribute("addBookmark", "Bookmark added to group " + "\"" + groupDao.getById(idGroupForAdd).getNameGroup() + "\"" + "!!!!");
             return "addBookmark";
         }
     }
@@ -125,10 +124,7 @@ public class StartController {
     @RequestMapping("/getBookmarksFromOneGroup/{id}")
     public String getBookmarksFromOneGroup(@PathVariable("id") int id) {
         idUser = userService.getIdFromUser();
-        idik = id;
-//        List<Bookmark> bookmarkList = groupDao.getBookmarksfromOneGroup(idik);
-//        bookmarks = bookmarkList;
-        bookmarks = groupDao.getBookmarksfromOneGroup(idik);
+        idGroup = id;
         nameGroup = groupDao.getById(id).getNameGroup();
         return "redirect:/test";
     }
@@ -140,7 +136,6 @@ public class StartController {
 
     @RequestMapping("/search")
     public String searchByName(@RequestParam String name, Model model) {
-//        model.addAttribute("bookmarkForSearch",groupDao.getBookmarkForSearch(name));
         bookmarkSearch = groupDao.getBookmarkForSearch(name);
         return "redirect:/test";
     }

@@ -47,35 +47,37 @@
     </c:if>
 
 
-        <c:choose>
-            <c:when test="${userRole=='user'}">
-                <script>
-                    $(document).ready(function () {
-                        $("#one").click(function () {
-
-                            $("p").hide(1000);
-                            alert("This button is for Admin only! You are not admin!");
-                        });
+    <c:choose>
+        <c:when test="${userRole=='user'}">
+            <script>
+                $(document).ready(function () {
+                    $("#two").click(function () {
+                        $("p").hide(1000);
+                        alert("This button is for Admin only! You are not admin!");
                     });
-                </script>
-            </c:when>
-            <c:when test="${userRole=='admin'}">
-                <script>
-                    $(document).ready(function () {
-                        $("#one").click(function () {
-                            $("p").hide(1000);
-                            alert("Access is allowed!");
-                        });
+                });
+            </script>
+            <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <form action="#">
+                <button id="two" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>
+            </form>
+        </c:when>
+        <c:when test="${userRole=='admin'}">
+            <script>
+                $(document).ready(function (e) {
+                    e.defaultChecked
+                    $("#one").click(function () {
+                        $("p").hide(1000);
+                        alert("Access is allowed!");
                     });
-                </script>
-            </c:when>
-        </c:choose>
-
-
-        <a class="navbar-brand">111111</a>
-        <form action="/users">
-            <button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>
-        </form>
+                });
+            </script>
+            <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <form action="/users">
+                <button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>
+            </form>
+        </c:when>
+    </c:choose>
 
     <div class="collapse navbar-collapse" id="navbarNav">
 
@@ -101,7 +103,7 @@
         <button type="submit" class="btn ">Search by name</button>
     </form>
 </nav>
-
+<br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
@@ -121,7 +123,7 @@
                 </c:if></form>
             <c:if test="${!empty groupsForUser}">
                 <h3>Groups:</h3>
-                <table class="table table-sm table-bordered">
+                <table class="table table-responsive-sm table-bordered">
                     <c:forEach items="${groupsForUser}" var="group">
                         <tr align="center">
                             <td>${group.nameGroup}</td>
@@ -135,8 +137,9 @@
         </div>
         <div class="col-sm-4">
             <c:if test="${!empty listBookmarks}">
-                <br>
-                <h3> Print bookmarks group "${nameGroup}"</h3>
+            <br>
+            <h3> Print bookmarks group "${nameGroup}"</h3>
+            <div class="table-responsive">
                 <table class="table table-striped">
 
                     <tbody>
@@ -162,18 +165,19 @@
                     </c:forEach>
                     </tbody>
                 </table>
-            </c:if>
+                </c:if>
+            </div>
         </div>
         <div class="col-sm-4">
             <c:if test="${!empty bookmarkForSearch}">
-                <br>
-                <h3> Searching results</h3>
+            <br>
+            <h3> Searching results</h3>
+            <div class="table-responsive">
                 <table class="table table-striped">
                     <tbody>
                     <c:forEach items="${bookmarkForSearch}" var="bookmark">
                         <tr align="center">
-                            <td><font
-                                    color="blue">${bookmark.bookmark}</font></td>
+                            <td><h4><a href="${bookmark.urlBookmark}">${bookmark.bookmark}</a></h4></td>&nbsp;
                         </tr>
 
                         <tr align="center">
@@ -188,14 +192,14 @@
                     </c:forEach>
                     </tbody>
                 </table>
-            </c:if>
+                </c:if>
+            </div>
         </div>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet"
+              media="screen">
+        <link href="../nestednav.css" rel="stylesheet">
     </div>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet"
-          media="screen">
-    <link href="../nestednav.css" rel="stylesheet">
-</div>
 
 </body>
 </html>

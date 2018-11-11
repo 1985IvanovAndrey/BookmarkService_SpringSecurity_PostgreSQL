@@ -80,10 +80,7 @@ public class UserController {
             securityService.autologin(userInfoForm.getUsername(), userInfoForm.getPasswordConfirm());
             return "redirect:/test";
         }
-//        userService.save(userInfoForm);
-//        securityService.autologin(userInfoForm.getUsername(), userInfoForm.getPasswordConfirm());
-//
-//        return "redirect:/welcome";
+
     }
 
     @RequestMapping(value = "/login1", method = RequestMethod.GET)
