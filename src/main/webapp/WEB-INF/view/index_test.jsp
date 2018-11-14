@@ -25,86 +25,181 @@
     <!-- Bootstrap core CSS -->
     <%--<link href="/resources/css/min.css" rel="stylesheet">--%>
     <style>
-        <%@include file="/resources/css/min.css"%>
+        <%@include file="/resources/css/main.css"%>
     </style>
 
-    <!-- Custom styles for this template -->
-    <link href="/resources/css/starter-template.css" rel="stylesheet">
+    <%--<link href="/resources/css/starter-template.css" rel="stylesheet">--%>
 </head>
-
 <body>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
-
+<%--<div class="container">--%>
+<%--<div align="right">--%>
+<%--<form action="/test/search">--%>
+<%--<input type="text" class="input-medium search-query" name="name">--%>
+<%--<button type="submit" class="btn ">Search by name</button>--%>
+<%--</form>--%>
+<%--</div>--%>
+<%--</div>--%>
+<div class="container">
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterId}" value="${_csrf.token}"/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-
-        <h2><font color="white"> Welcome - ${pageContext.request.userPrincipal.name} |
-            <button size="1" onclick="document.forms['logoutForm'].submit()">Logout</button>
-        </font></h2>
+        <div class="col-md-offset-8">
+            <h3>Welcome, ${pageContext.request.userPrincipal.name} |
+                <button onclick="document.forms['logoutForm'].submit()">Logout
+                </button>
+            </h3>
+        </div>
     </c:if>
+    <div class="alert alert-success" role="alert">
+        <div align="left">
+            <c:choose>
+                <c:when test="${userRole=='user'}">
+                    <script>
+                        $(document).ready(function () {
+                            $("#two").click(function () {
+                                $("p").hide(1000);
+                                alert("This button is for Admin only! You are not admin!");
+                            });
+                        });
+                    </script>
+                    <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <form action="#">
+                        <button id="two" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN
+                        </button>
+                    </form>
+                </c:when>
+                <c:when test="${userRole=='admin'}">
+                    <script>
+                        $(document).ready(function (e) {
+                            e.defaultChecked
+                            $("#one").click(function () {
+                                $("p").hide(1000);
+                                alert("Access is allowed!");
+                            });
+                        });
+                    </script>
+                    <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <form action="/users">
+                        <button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN
+                        </button>
+                    </form>
+                </c:when>
+            </c:choose>
+        </div>
+        <div align="center"><h1>Bookmark Service</h1></div>
+        <%--<hr>--%>
+        <%--<h1>--%>
+        <%--<div align="center">Bookmark Service</div>--%>
+        <%--</h1>--%>
+
+        <%--<c:choose>--%>
+        <%--<c:when test="${userRole=='user'}">--%>
+        <%--<script>--%>
+        <%--$(document).ready(function () {--%>
+        <%--$("#two").click(function () {--%>
+        <%--$("p").hide(1000);--%>
+        <%--alert("This button is for Admin only! You are not admin!");--%>
+        <%--});--%>
+        <%--});--%>
+        <%--</script>--%>
+        <%--<a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>--%>
+        <%--<form action="#">--%>
+        <%--<button id="two" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>--%>
+        <%--</form>--%>
+        <%--</c:when>--%>
+        <%--<c:when test="${userRole=='admin'}">--%>
+        <%--<script>--%>
+        <%--$(document).ready(function (e) {--%>
+        <%--e.defaultChecked--%>
+        <%--$("#one").click(function () {--%>
+        <%--$("p").hide(1000);--%>
+        <%--alert("Access is allowed!");--%>
+        <%--});--%>
+        <%--});--%>
+        <%--</script>--%>
+        <%--<a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>--%>
+        <%--<form action="/users">--%>
+        <%--<button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>--%>
+        <%--</form>--%>
+        <%--</c:when>--%>
+        <%--</c:choose>--%>
 
 
-    <c:choose>
-        <c:when test="${userRole=='user'}">
-            <script>
-                $(document).ready(function () {
-                    $("#two").click(function () {
-                        $("p").hide(1000);
-                        alert("This button is for Admin only! You are not admin!");
-                    });
-                });
-            </script>
-            <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-            <form action="#">
-                <button id="two" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>
-            </form>
-        </c:when>
-        <c:when test="${userRole=='admin'}">
-            <script>
-                $(document).ready(function (e) {
-                    e.defaultChecked
-                    $("#one").click(function () {
-                        $("p").hide(1000);
-                        alert("Access is allowed!");
-                    });
-                });
-            </script>
-            <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-            <form action="/users">
-                <button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>
-            </form>
-        </c:when>
-    </c:choose>
+        <%--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">--%>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+        <%--<c:if test="${pageContext.request.userPrincipal.name != null}">--%>
+        <%--<form id="logoutForm" method="POST" action="${contextPath}/logout">--%>
+        <%--<input type="hidden" name="${_csrf.parameterId}" value="${_csrf.token}"/>--%>
+        <%--</form>--%>
 
-        <ul class="navbar-nav mr-auto">
+        <%--<h2><font color="white"> Welcome, ${pageContext.request.userPrincipal.name} |--%>
+        <%--<button onclick="document.forms['logoutForm'].submit()">Logout</button>--%>
+        <%--</font></h2>--%>
+        <%--</c:if>--%>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#"><font color="white"> Home </font><span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">sdsdfsdsf</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
+
+        <%--<c:choose>--%>
+        <%--<c:when test="${userRole=='user'}">--%>
+        <%--<script>--%>
+        <%--$(document).ready(function () {--%>
+        <%--$("#two").click(function () {--%>
+        <%--$("p").hide(1000);--%>
+        <%--alert("This button is for Admin only! You are not admin!");--%>
+        <%--});--%>
+        <%--});--%>
+        <%--</script>--%>
+        <%--<a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>--%>
+        <%--<form action="#">--%>
+        <%--<button id="two" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>--%>
+        <%--</form>--%>
+        <%--</c:when>--%>
+        <%--<c:when test="${userRole=='admin'}">--%>
+        <%--<script>--%>
+        <%--$(document).ready(function (e) {--%>
+        <%--e.defaultChecked--%>
+        <%--$("#one").click(function () {--%>
+        <%--$("p").hide(1000);--%>
+        <%--alert("Access is allowed!");--%>
+        <%--});--%>
+        <%--});--%>
+        <%--</script>--%>
+        <%--<a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>--%>
+        <%--<form action="/users">--%>
+        <%--<button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN</button>--%>
+        <%--</form>--%>
+        <%--</c:when>--%>
+        <%--</c:choose>--%>
+
+        <%--<div class="collapse navbar-collapse" id="navbarNav">--%>
+
+        <%--<ul class="navbar-nav mr-auto">--%>
+
+        <%--<li class="nav-item active">--%>
+        <%--<a class="nav-link" href="#"><font color="white"> Home </font><span class="sr-only">(current)</span></a>--%>
+        <%--</li>--%>
+        <%--<li class="nav-item">--%>
+        <%--<a class="nav-link" href="#"></a>--%>
+        <%--</li>--%>
+        <%--<li class="nav-item">--%>
+        <%--<a class="nav-link" href="#">sdsdfsdsf</a>--%>
+        <%--</li>--%>
+        <%--<li class="nav-item">--%>
+        <%--<a class="nav-link disabled" href="#">Disabled</a>--%>
+        <%--</li>--%>
+        <%--</ul>--%>
+        <%--</div>--%>
+
+        <form action="/test/search">
+            <div align="right">
+                <input type="text" class="input-medium search-query" name="name">
+                <button type="submit" class="btn ">Search by name</button>
+            </div>
+        </form>
     </div>
-
-    <form action="/test/search">
-        <input type="text" class="input-medium search-query" name="name">
-        <button type="submit" class="btn ">Search by name</button>
-    </form>
-</nav>
-<br>
-<div class="container-fluid">
+</div>
+<%--</nav>--%>
+<div class="container">
     <div class="row">
         <div class="col-4">
             <form action="/test/add">
@@ -137,11 +232,9 @@
         </div>
         <div class="col-sm-4">
             <c:if test="${!empty listBookmarks}">
-            <br>
             <h3> Print bookmarks group "${nameGroup}"</h3>
             <div class="table-responsive">
                 <table class="table table-striped">
-
                     <tbody>
                     <c:forEach items="${listBookmarks}" var="bookmark">
                         <tr align="center">
@@ -158,9 +251,8 @@
                             <td>${bookmark.urlBookmark}</td>
                             <td></td>
                         </tr>
-                        <tr bgcolor="#faebd7">
-                            <td></td>
-                            <td></td>
+                        <tr>
+                            <td><hr></td><td><hr></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -195,11 +287,13 @@
                 </c:if>
             </div>
         </div>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"
+              media="screen">
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet"
               media="screen">
         <link href="../nestednav.css" rel="stylesheet">
     </div>
-
+</div>
+</div>
 </body>
 </html>
