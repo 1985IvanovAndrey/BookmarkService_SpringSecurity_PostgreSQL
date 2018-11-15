@@ -25,7 +25,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 <body>
-<div class="col-4">
+<div class="col-5">
     <c:if test="${!empty userList}">
 
         <h4>Users:</h4>
@@ -37,6 +37,8 @@
                 <th>name</th>
                 <th>role</th>
                 <th>del</th>
+                <th>all bookmarks</th>
+
             </tr>
             </thead>
             <tbody>
@@ -54,6 +56,7 @@
                             <td>do not delete</td>
                         </c:when>
                     </c:choose>
+                    <td><a href="<c:url value='/allBookmarkForUser/${user.id}'/>">print</a></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -67,16 +70,40 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-        <h2>${pageContext.request.userPrincipal.name} | <button onclick="document.forms['logoutForm'].submit()">Logout</button></h2>
+        <h2>${pageContext.request.userPrincipal.name} |
+            <button onclick="document.forms['logoutForm'].submit()">Logout</button>
+        </h2>
     </c:if>
     <br>
     <form action="/test">
         <input class=" btn btn-outline-primary btn-sm" type="submit" value="back">
     </form>
+    <br>
+
+    <c:if test="${!empty bookmarkList}">
+
+        <table class="table table-sm table-bordered">
+            <thead>
+            <tr align="center" class="table-active">
+                <th>name</th>
+                <th>url</th>
+                <th>description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${bookmarkList}" var="bookmark">
+                <tr align="center">
+                    <td>${bookmark.bookmark}</td>
+                    <td>${bookmark.urlBookmark}</td>
+                    <td>${bookmark.description}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap1.min.js"></script>
-</div>
 </body>
 </html>

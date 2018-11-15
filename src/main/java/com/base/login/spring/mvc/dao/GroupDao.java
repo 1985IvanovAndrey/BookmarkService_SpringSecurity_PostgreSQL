@@ -29,4 +29,8 @@ public interface GroupDao {
     void deleteBookmark(int id);
 
     List<Bookmark> getBookmarkForSearch(String name);
+
+    List<Bookmark>allBookmarkForActiveUser();
+
+    List<Bookmark>allBookmarkForOneUser(int id);
 }

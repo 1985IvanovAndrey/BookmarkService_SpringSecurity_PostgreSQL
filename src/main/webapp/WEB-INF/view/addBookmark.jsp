@@ -17,47 +17,99 @@
     <style>
         <%@include file="/resources/css/min.css"%>
     </style>
-    <link href="/resources/css/starter-template.css" rel="stylesheet">
+    <%--<link href="/resources/css/starter-template.css" rel="stylesheet">--%>
     <title>Add Bookmark</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <%--<a class="navbar-brand" href="#">Welcome Bookmark Service!!</a>--%>
-    <%--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">--%>
-    <%--<span class="navbar-toggler-icon"></span>--%>
-    <%--</button>--%>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterId}" value="${_csrf.token}"/>
-        </form>
+<%--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">--%>
+    <%--&lt;%&ndash;<a class="navbar-brand" href="#">Welcome Bookmark Service!!</a>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<span class="navbar-toggler-icon"></span>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;</button>&ndash;%&gt;--%>
+    <%--<c:if test="${pageContext.request.userPrincipal.name != null}">--%>
+        <%--<form id="logoutForm" method="POST" action="${contextPath}/logout">--%>
+            <%--<input type="hidden" name="${_csrf.parameterId}" value="${_csrf.token}"/>--%>
+        <%--</form>--%>
 
-        <h4><font color="white"> Welcome ${pageContext.request.userPrincipal.name} |
-            <button size="1" onclick="document.forms['logoutForm'].submit()">Logout</button>
-        </font></h4>
-    </c:if>
+        <%--<h4><font color="white"> Welcome ${pageContext.request.userPrincipal.name} |--%>
+            <%--<button size="1" onclick="document.forms['logoutForm'].submit()">Logout</button>--%>
+        <%--</font></h4>--%>
+    <%--</c:if>--%>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="i.ua"></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#"></a>
-            </li>
-        </ul>
-    </div>
-    <%--<div style="align-content: center">--%>
-    <%--<form class="form-inline my-2 my-lg-0">--%>
-    <%--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">--%>
-    <%--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-    <%--</form>--%>
+    <%--<div class="collapse navbar-collapse" id="navbarsExampleDefault">--%>
+        <%--<ul class="navbar-nav mr-auto">--%>
+            <%--<li class="nav-item active">--%>
+                <%--<a class="nav-link" href="#"><span class="sr-only">(current)</span></a>--%>
+            <%--</li>--%>
+            <%--<li class="nav-item">--%>
+                <%--<a class="nav-link" href="i.ua"></a>--%>
+            <%--</li>--%>
+            <%--<li class="nav-item">--%>
+                <%--<a class="nav-link disabled" href="#"></a>--%>
+            <%--</li>--%>
+        <%--</ul>--%>
     <%--</div>--%>
-</nav>
+    <%--&lt;%&ndash;<div style="align-content: center">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<form class="form-inline my-2 my-lg-0">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--</nav>--%>
 
 <div class="container">
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <div class="col-md-offset-8">
+            <h3>Welcome, ${pageContext.request.userPrincipal.name} |
+                <button onclick="document.forms['logoutForm'].submit()">Logout
+                </button>
+            </h3>
+
+        </div>
+    </c:if>
+    <div class="alert alert-success" role="alert">
+        <div align="left">
+            <c:choose>
+                <c:when test="${userRole=='user'}">
+                    <script>
+                        $(document).ready(function () {
+                            $("#two").click(function () {
+                                $("p").hide(1000);
+                                alert("This button is for Admin only! You are not admin!");
+                            });
+                        });
+                    </script>
+                    <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <form action="#">
+                        <button id="two" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN
+                        </button>
+                    </form>
+                </c:when>
+                <c:when test="${userRole=='admin'}">
+                    <script>
+                        $(document).ready(function (e) {
+                            e.defaultChecked
+                            $("#one").click(function () {
+                                $("p").hide(1000);
+                                alert("Access is allowed!");
+                            });
+                        });
+                    </script>
+                    <a class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <form action="/users">
+                        <button id="one" type="submit" class="btn btn-outline-primary btn-sm ">Only for ADMIN
+                        </button>
+                    </form>
+                </c:when>
+            </c:choose>
+        </div>
+        <h1>
+            <div align="center">Bookmark Service</div>
+        </h1>
+    </div>
     <div class="row">
         <div class="col-3">
 
@@ -86,7 +138,7 @@
                 <div class="form-group">
                     <label for="description" class="col-form-label-sm"></label>
                     <%--<input type="ID" class="form-control" id="description"  name="description"--%>
-                           <%--placeholder="enter description_bookmark">--%>
+                    <%--placeholder="enter description_bookmark">--%>
                     <textarea class="form-control" rows="3" id="description"
                               name="description" placeholder="description"></textarea>
                     <c:if test="${not empty description}">

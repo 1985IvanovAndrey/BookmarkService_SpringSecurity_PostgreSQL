@@ -201,7 +201,7 @@
 <%--</nav>--%>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-4">
             <form action="/test/add">
                 <div class="form-group">
                     <label for="group" class="col-form-label-sm"><h3>Create new group:</h3></label>
@@ -229,23 +229,18 @@
                     </c:forEach>
                 </table>
             </c:if>
-            <form action="/test/showAllBookmarks">
-
-                <input class=" btn btn-outline-primary btn-sm" type="submit" value="Show all bookmarks">
-
-               </form>
         </div>
         <div class="col-sm-4">
             <c:if test="${!empty listBookmarks}">
-            <h3> ${messageForGroupName} ${nameGroup}</h3>
+            <h3> Print bookmarks group "${nameGroup}"</h3>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tbody>
                     <c:forEach items="${listBookmarks}" var="bookmark">
-                        <tr>
-                            <td><h4><a href="${bookmark.urlBookmark}">${bookmark.bookmark}</a></h4></td>
+                        <tr align="center">
+                            <td><h4><a href="${bookmark.urlBookmark}">${bookmark.bookmark}</a></h4></td>&nbsp;
                             <td><h4><a href="<c:url value='/test/removeBookmark/${bookmark.id}'/>"><font
-                                    color="#ff4324"><div align="right" > del</div></font></a></h4></td>
+                                    color="#ff4324">del</font></a></h4></td>
                         </tr>
                         <tr align="center">
                             <td>${bookmark.description}</td>
@@ -256,9 +251,8 @@
                             <td>${bookmark.urlBookmark}</td>
                             <td></td>
                         </tr>
-                        <tr bgcolor="#fff8dc">
-                            <td></td>
-                            <td></td>
+                        <tr>
+                            <td><hr></td><td><hr></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -266,7 +260,7 @@
                 </c:if>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <c:if test="${!empty bookmarkForSearch}">
             <br>
             <h3> Searching results</h3>

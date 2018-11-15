@@ -13,4 +13,6 @@ public interface GroupsRepository extends JpaRepository<Groups, Integer> {
     List<Groups> findAllByUserInfo_Username(String name);
 
     List<Groups>findAllByUserInfo(UserInfo userInfo);
+
+    List<Groups>findAllByUserInfo_Id(int id);
 }
