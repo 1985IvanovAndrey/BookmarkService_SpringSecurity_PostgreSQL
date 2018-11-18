@@ -43,6 +43,8 @@ public class StartController {
         } else {
             groupDao.getGroupsForUser();
             model.addAttribute("listBookmarks", groupDao.allBookmarkForActiveUser());
+            messageForGroupName=null;
+            nameGroup=null;
         }
         model.addAttribute("userList", userService.userList());
         model.addAttribute("nameGroup", nameGroup);
