@@ -21,41 +21,6 @@
     <title>Add Bookmark</title>
 </head>
 <body>
-<%--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">--%>
-    <%--&lt;%&ndash;<a class="navbar-brand" href="#">Welcome Bookmark Service!!</a>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<span class="navbar-toggler-icon"></span>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</button>&ndash;%&gt;--%>
-    <%--<c:if test="${pageContext.request.userPrincipal.name != null}">--%>
-        <%--<form id="logoutForm" method="POST" action="${contextPath}/logout">--%>
-            <%--<input type="hidden" name="${_csrf.parameterId}" value="${_csrf.token}"/>--%>
-        <%--</form>--%>
-
-        <%--<h4><font color="white"> Welcome ${pageContext.request.userPrincipal.name} |--%>
-            <%--<button size="1" onclick="document.forms['logoutForm'].submit()">Logout</button>--%>
-        <%--</font></h4>--%>
-    <%--</c:if>--%>
-
-    <%--<div class="collapse navbar-collapse" id="navbarsExampleDefault">--%>
-        <%--<ul class="navbar-nav mr-auto">--%>
-            <%--<li class="nav-item active">--%>
-                <%--<a class="nav-link" href="#"><span class="sr-only">(current)</span></a>--%>
-            <%--</li>--%>
-            <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="i.ua"></a>--%>
-            <%--</li>--%>
-            <%--<li class="nav-item">--%>
-                <%--<a class="nav-link disabled" href="#"></a>--%>
-            <%--</li>--%>
-        <%--</ul>--%>
-    <%--</div>--%>
-    <%--&lt;%&ndash;<div style="align-content: center">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<form class="form-inline my-2 my-lg-0">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--</nav>--%>
 
 <div class="container">
     <c:if test="${pageContext.request.userPrincipal.name != null}">
