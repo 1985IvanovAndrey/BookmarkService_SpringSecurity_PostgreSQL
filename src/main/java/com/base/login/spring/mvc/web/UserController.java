@@ -49,39 +49,13 @@ public class UserController {
 
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") UserInfo userInfoForm, BindingResult bindingResult, Model model) {
-//        userValidator.validate(userInfoForm, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
-        //userInfoForm.getUsername().toLowerCase();
-        int count = 0;
-        if (userInfoForm.getUsername().length() < 6 || userInfoForm.getUsername().length() > 32) {
-            model.addAttribute("email", "Please use between 6 and 32 characters");
-            count++;
-        }
-        if (userInfoForm.getPassword() == "") {
-            model.addAttribute("password", "Try one with at least 8 characters");
-            count++;
-        }
-        if (!userInfoForm.getPasswordConfirm().equals(userInfoForm.getPassword())) {
-            model.addAttribute("password_confirm", "These passwords don't match");
-            count++;
-        }
-        if (userService.findByUsername(userInfoForm.getUsername().toLowerCase()) != null) {
-            model.addAttribute("duplicate", "Someone already has that email");
-            count++;
-        }
-        if (count > 0) {
+        userValidator.validate(userInfoForm, bindingResult);
+        if (bindingResult.hasErrors()) {
             return "registration";
-
-        } else {
-            String str = userInfoForm.getUsername().toLowerCase();
-            userInfoForm.setUsername(str);
-            userService.save(userInfoForm);
-            securityService.autologin(userInfoForm.getUsername(), userInfoForm.getPasswordConfirm());
-            return "redirect:/test";
         }
+        userService.save(userInfoForm);
+        securityService.autologin(userInfoForm.getUsername(), userInfoForm.getPasswordConfirm());
+        return "redirect:/test";
 
     }
 
@@ -117,6 +91,12 @@ public class UserController {
     public String deleteUser(Model model, @PathVariable("id") int id) {
         userService.delUser(id);
         System.out.println(id);
+        model.addAttribute("userList", userService.userList());
+        return "users";
+    }
+    @RequestMapping(value = "/allBookmarkForUser/{id}", method = RequestMethod.GET)
+    public String getAllBookmarkForOneUser(@PathVariable("id") int id,Model model) {
+        model.addAttribute("bookmarkList",groupDao.allBookmarkForOneUser(id));
         model.addAttribute("userList", userService.userList());
         return "users";
     }

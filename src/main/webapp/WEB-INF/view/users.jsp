@@ -25,58 +25,87 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 <body>
-<div class="col-4">
-    <c:if test="${!empty userList}">
+<div class="col-7">
+    <div class="container">
+        <c:if test="${!empty userList}">
 
-        <h4>Users:</h4>
+            <h4>Users:</h4>
 
-        <table class="table table-sm table-bordered">
-            <thead>
-            <tr align="center" class="table-active">
-                <th>id</th>
-                <th>name</th>
-                <th>role</th>
-                <th>del</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${userList}" var="user">
-                <tr align="center">
-                    <td>${user.id}</td>
-                    <td>${user.username}</td>
-                    <td>${user.userRole}</td>
-                        <%--<c:if test="${user.userRole=='user'}">--%>
-                    <c:choose>
-                        <c:when test="${user.userRole=='user'}">
-                            <td><a href="<c:url value='/remove/${user.id}'/>">del</a></td>
-                        </c:when>
-                        <c:when test="${user.userRole=='admin'}">
-                            <td>do not delete</td>
-                        </c:when>
-                    </c:choose>
+            <table class="table table-sm table-bordered">
+                <thead>
+                <tr align="center" class="table-active">
+                    <th>id</th>
+                    <th>name</th>
+                    <th>role</th>
+                    <th>del</th>
+                    <th>all bookmarks</th>
+
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
-    <form action="/registration">
-        <input class=" btn btn-outline-primary btn-sm" type="submit" value="Form registration">
-    </form>
-    <br>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </thead>
+                <tbody>
+                <c:forEach items="${userList}" var="user">
+                    <tr align="center">
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.userRole}</td>
+                            <%--<c:if test="${user.userRole=='user'}">--%>
+                        <c:choose>
+                            <c:when test="${user.userRole=='user'}">
+                                <td><a href="<c:url value='/remove/${user.id}'/>">del</a></td>
+                            </c:when>
+                            <c:when test="${user.userRole=='admin'}">
+                                <td>do not delete</td>
+                            </c:when>
+                        </c:choose>
+                        <td><a href="<c:url value='/allBookmarkForUser/${user.id}'/>">print</a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+        <form action="/registration">
+            <input class=" btn btn-outline-primary btn-sm" type="submit" value="Form registration">
         </form>
-        <h2>${pageContext.request.userPrincipal.name} | <button onclick="document.forms['logoutForm'].submit()">Logout</button></h2>
-    </c:if>
-    <br>
-    <form action="/test">
-        <input class=" btn btn-outline-primary btn-sm" type="submit" value="back">
-    </form>
-</div>
-<!-- /container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap1.min.js"></script>
+        <br>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+            <h2>${pageContext.request.userPrincipal.name} |
+                <button onclick="document.forms['logoutForm'].submit()">Logout</button>
+            </h2>
+        </c:if>
+        <br>
+        <form action="/test">
+            <input class=" btn btn-outline-primary btn-sm" type="submit" value="back">
+        </form>
+        <br>
+
+        <c:if test="${!empty bookmarkList}">
+
+            <table class="table table-sm table-bordered">
+                <thead>
+                <tr align="center" class="table-active">
+                    <th>name</th>
+                    <th>url</th>
+                    <th>description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${bookmarkList}" var="bookmark">
+                    <tr align="center">
+                        <td>${bookmark.bookmark}</td>
+                        <td>${bookmark.urlBookmark}</td>
+                        <td>${bookmark.description}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+    </div>
+    <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="${contextPath}/resources/js/bootstrap1.min.js"></script>
 </div>
 </body>
 </html>

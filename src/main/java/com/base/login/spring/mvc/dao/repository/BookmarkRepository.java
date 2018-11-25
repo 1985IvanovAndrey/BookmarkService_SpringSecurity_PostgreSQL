@@ -2,10 +2,12 @@ package com.base.login.spring.mvc.dao.repository;
 
 
 import com.base.login.spring.mvc.dao.model.Bookmark;
+import com.base.login.spring.mvc.dao.model.Groups;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface BookmarkRepository extends JpaRepository<Bookmark,Integer>{
+public interface BookmarkRepository extends JpaRepository<Bookmark, Integer> {
+
 
 }

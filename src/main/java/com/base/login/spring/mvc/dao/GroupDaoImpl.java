@@ -146,5 +146,27 @@ public class GroupDaoImpl implements GroupDao {
         }
         return bookmarkList;
     }
+    @Override
+    public List<Bookmark>allBookmarkForActiveUser(){
+        List<Groups>groupsList=getGroupsForUser();
+        List<Bookmark>bookmarkList=new ArrayList<>();
+        for (int i = 0; i < groupsList.size(); i++) {
+                for (int j = 0; j < groupsList.get(i).getBookmarks().size(); j++) {
+                    bookmarkList.add(groupsList.get(i).getBookmarks().get(j));
+                }
+            }
+        return bookmarkList;
+    }
+    @Override
+    public List<Bookmark>allBookmarkForOneUser(int id){
+        List<Groups>groupsList=groupsRepository.findAllByUserInfo_Id(id);
+        List<Bookmark>bookmarkList=new ArrayList<>();
+        for (int i = 0; i < groupsList.size(); i++) {
+            for (int j = 0; j < groupsList.get(i).getBookmarks().size(); j++) {
+                bookmarkList.add(groupsList.get(i).getBookmarks().get(j));
+            }
+        }
+        return bookmarkList;
+    }
 }
 

@@ -4,6 +4,7 @@ import com.base.login.spring.mvc.dao.GroupDao;
 import com.base.login.spring.mvc.dao.model.Bookmark;
 import com.base.login.spring.mvc.dao.model.Groups;
 import com.base.login.spring.mvc.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,8 @@ public class StartController {
     @Autowired
     private UserService userService;
 
+    private static final Logger logger = Logger.getLogger(StartController.class);
+
     int idGroup;
     int idGroupForAdd;
     List<Bookmark> bookmarks;
@@ -29,17 +32,23 @@ public class StartController {
     String nameGroup;
     String name;
     String message;
+    String messageForGroupName;
     int idUser;
 
 
     @GetMapping
     public String getAllGroups(Model model) {
-      
         if (idUser == userService.getIdFromUser()) {
-            model.addAttribute("listBookmarks", groupDao.getBookmarksfromOneGroup(idGroup));
+            model.addAttribute("listBookmarks", bookmarks);
+        } else {
+            groupDao.getGroupsForUser();
+            model.addAttribute("listBookmarks", groupDao.allBookmarkForActiveUser());
+            messageForGroupName=null;
+            nameGroup=null;
         }
         model.addAttribute("userList", userService.userList());
         model.addAttribute("nameGroup", nameGroup);
+        model.addAttribute("messageForGroupName", messageForGroupName);
         model.addAttribute("name", name);
         model.addAttribute("message", message);
         model.addAttribute("groupsForUser", groupDao.getGroupsForUser());
@@ -66,6 +75,7 @@ public class StartController {
             return "redirect:/test";
         } else {
             groupDao.addGroup(group);
+            logger.info("Add group = " + group.getNameGroup());
             return "redirect:/test";
         }
     }
@@ -75,6 +85,7 @@ public class StartController {
         groupDao.deleteGroup(id);
         System.out.println(id);
         bookmarks = null;
+        logger.info("Delete group with id = " + id);
         return "redirect:/test";
     }
 
@@ -83,6 +94,7 @@ public class StartController {
         groupDao.deleteBookmark(id);
         System.out.println(id);
         bookmarks = groupDao.getBookmarksfromOneGroup(idGroup);
+        logger.info("Delete bookmark with id = " + id);
         return "redirect:/test";
     }
 
@@ -90,6 +102,7 @@ public class StartController {
     public String addBookmarkInGroup(@PathVariable("id") int id, Model model) {
         idGroupForAdd = id;
         model.addAttribute("nameGroup1", groupDao.getById(id).getNameGroup());
+        logger.info("Add bookmark in group name = " + groupDao.getById(id).getNameGroup());
         return "addBookmark";
     }
 
@@ -120,12 +133,13 @@ public class StartController {
         }
     }
 
-
     @RequestMapping("/getBookmarksFromOneGroup/{id}")
     public String getBookmarksFromOneGroup(@PathVariable("id") int id) {
         idUser = userService.getIdFromUser();
         idGroup = id;
-        nameGroup = groupDao.getById(id).getNameGroup();
+        nameGroup = "\"" + groupDao.getById(id).getNameGroup() + "\"" + ":";
+        messageForGroupName = "Print bookmarks group";
+        bookmarks = groupDao.getBookmarksfromOneGroup(idGroup);
         return "redirect:/test";
     }
 
@@ -137,6 +151,14 @@ public class StartController {
     @RequestMapping("/search")
     public String searchByName(@RequestParam String name, Model model) {
         bookmarkSearch = groupDao.getBookmarkForSearch(name);
+        return "redirect:/test";
+    }
+
+    @RequestMapping("/showAllBookmarks")
+    public String showAllBookmarks(Model model) {
+        bookmarks = groupDao.allBookmarkForActiveUser();
+        nameGroup = null;
+        messageForGroupName = null;
         return "redirect:/test";
     }
 

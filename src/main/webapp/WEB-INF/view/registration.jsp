@@ -39,22 +39,12 @@
                 <form:errors path="username" cssClass="error"></form:errors>
             </div>
         </spring:bind>
-        <c:if test="${not empty email}">
-            <h5><font color="red">${email}!!!</font></h5>
-        </c:if>
-        <c:if test="${not empty duplicate}">
-            <h5><font color="red"> ${duplicate}!!!</font></h5>
-        </c:if>
-
         <spring:bind path="password">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
                 <form:errors path="password"></form:errors>
             </div>
         </spring:bind>
-        <c:if test="${not empty password}">
-            <h5><font color="red">${password}!!!</font></h5>
-        </c:if>
         <spring:bind path="passwordConfirm">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="passwordConfirm" class="form-control"
@@ -62,9 +52,6 @@
                 <form:errors path="passwordConfirm"></form:errors>
             </div>
         </spring:bind>
-        <c:if test="${not empty password_confirm}">
-            <h5><font color="red">${password_confirm}!!!</font></h5>
-        </c:if>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
     <form:form action="/login1" class="form-signin">
