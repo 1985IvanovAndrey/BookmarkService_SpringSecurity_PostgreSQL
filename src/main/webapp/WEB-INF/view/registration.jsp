@@ -27,11 +27,11 @@
 </head>
 
 <body>
+<body style="background-image:url(../resources/image/fff.jpg)">
 
 <div class="container">
-
     <form:form method="POST" action="/registration" modelAttribute="userForm" class="form-signin">
-        <h2 class="form-signin-heading">Create your account</h2>
+        < class="form-signin-heading"><h2><font color="#fff8dc"> Create your account</font></h2>
         <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="email" path="username" class="form-control" placeholder="Enter email"
@@ -67,7 +67,7 @@
         </c:if>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
-    <form:form action="/login" class="form-signin">
+    <form:form action="/login1" class="form-signin">
         <button class="btn btn-group-lg btn-info btn-block" type="submit">Login page</button>
     </form:form>
 

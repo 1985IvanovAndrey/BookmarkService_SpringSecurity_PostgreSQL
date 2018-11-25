@@ -13,15 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
-
+@RequestMapping("/")
 @Controller
 public class UserController {
     @Autowired
@@ -38,14 +35,19 @@ public class UserController {
     @Autowired
     private GroupDao groupDao;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @GetMapping
+    public String start() {
+        return "start";
+    }
+
+    @RequestMapping(value = "registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new UserInfo());
 
         return "registration";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") UserInfo userInfoForm, BindingResult bindingResult, Model model) {
 //        userValidator.validate(userInfoForm, bindingResult);
 //
@@ -83,7 +85,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/login1", method = RequestMethod.GET)
+    @RequestMapping(value = "login1", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null)
             model.addAttribute("error", "Your email address and password is invalid.");
@@ -93,17 +95,17 @@ public class UserController {
         return "login1";
     }
 
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        for (UserInfo info : userRepository.findAll()) {
-            if (info.getUsername().equals(authentication.getName())) {
-                System.out.println(info.getId());
-            }
-        }
-        groupDao.listBookmark().clear();
-        return "index_test";
-    }
+//    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+//    public String welcome(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        for (UserInfo info : userRepository.findAll()) {
+//            if (info.getUsername().equals(authentication.getName())) {
+//                System.out.println(info.getId());
+//            }
+//        }
+//        groupDao.listBookmark().clear();
+//        return "index_test";
+//    }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getAllUsers(Model model) {

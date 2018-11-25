@@ -1,4 +1,4 @@
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%--<c:set var="contextPath" value="${pageContext.request.contextPath}"/>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,19 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Bookmark Service</title>
-
     <style>
         <%@include file="/resources/css/style.css"%>
     </style>
-
-    <%--<link rel="stylesheet" href="/resources/css/style.css">--%>
-
-
 </head>
-
 <body>
-
-<body>
+<body style="background-image:url(../resources/image/fff.jpg)">
 <div class="container">
     <section id="content">
         <form method="POST" action="${contextPath}/login1" class="form-signin">
@@ -26,41 +19,24 @@
             <%--<div>--%>
             <div class="form-group ${error != null ? 'has-error' : ''}">
                 <span>${message}</span>
-
-
                 <input name="username" type="email" class="form-control" placeholder="Email" required=""
                        autofocus="true"/>
-
             </div>
             <div>
-
                 <input name="password" type="password" class="form-control" placeholder="Password" required=""/>
                 <br>
                 <span>${error}</span>
-
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </div>
             <a>
                 <input type="submit" value="Log in"/>
                 <%--<input type="submit">Log In</input>--%>
-
                 <%--<a href="#">Lost your password?</a>--%>
                 <%--<input type="submit"<a href="/registration" value="Register"/></a>--%>
                 <%--<a href="/registration">Register</a>--%>
                 <h2 input type="submit"><a href="/registration">Register</a></h2>
 </div>
 </form><!-- form -->
-<%--<div class="button">--%>
-<%--<a href="#">Download source file</a>--%>
-<%--</div><!-- button -->--%>
 </section><!-- content -->
-<%--</div><!-- container -->--%>
 </body>
-
-
-<%--<script src="js/index.js"></script>--%>
-
-
-</body>
-
 </html>

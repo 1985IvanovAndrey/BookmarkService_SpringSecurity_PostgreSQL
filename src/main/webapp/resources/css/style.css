@@ -1,11 +1,26 @@
-body {
-	background: #DCDDDF url('https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png');
-	color: #000D;
-	font: 14px Arial;
-	margin: 0 auto;
-	padding: 0;
-	position: relative;
-}
+/*@import url('https://fonts.googleapis.com/css?family=Numans');*/
+
+/*html,body {*/
+	/*background-image:url("../resources/image/fff.jpg");*/
+	/*!*color: #000D;*!*/
+	/*!*font: 14px Arial;*!*/
+	/*!*margin: 0 auto;*!*/
+	/*!*padding: 0;*!*/
+	/*!*position: relative;*!*/
+	/*background-size: cover;*/
+	/*background-repeat: no-repeat;*/
+	/*height: 100%;*/
+	/*!*font-family: 'Numans', sans-serif;*!*/
+/*}*/
+/*@import url('https://fonts.googleapis.com/css?family=Numans');*/
+
+/*html,body{*/
+	/*background-image: url("../image/black-background-blank-card-1383562.jpg");*/
+	/*background-size: cover;*/
+	/*background-repeat: no-repeat;*/
+	/*height: 100%;*/
+	/*font-family: 'Numans', sans-serif;*/
+/*}*/
 h1{ font-size:28px;}
 h2{ font-size:26px;}
 h3{ font-size:18px;}

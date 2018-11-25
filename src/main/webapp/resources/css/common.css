@@ -1,7 +1,24 @@
+
+
+
+html,body {
+    background-image:url("../resources/image/fff.jpg");
+    /*color: #000D;*/
+    /*font: 14px Arial;*/
+    /*margin: 0 auto;*/
+    /*padding: 0;*/
+    /*position: relative;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    /*font-family: 'Numans', sans-serif;*/
+}
+
 body {
+
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #eee;
+    /*background-color: #eee;*/
 }
 
 .form-signin {
@@ -27,6 +44,11 @@ body {
     box-sizing: border-box;
     padding: 10px;
     font-size: 16px;
+}
+main-img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .form-signin .form-control:focus {

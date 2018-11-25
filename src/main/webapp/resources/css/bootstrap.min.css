@@ -3,6 +3,19 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+html,body {
+    background-image:url("../resources/image/fff.jpg");
+    /*color: #000D;*/
+    /*font: 14px Arial;*/
+    /*margin: 0 auto;*/
+    /*padding: 0;*/
+    /*position: relative;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    /*font-family: 'Numans', sans-serif;*/
+}
+
 html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
