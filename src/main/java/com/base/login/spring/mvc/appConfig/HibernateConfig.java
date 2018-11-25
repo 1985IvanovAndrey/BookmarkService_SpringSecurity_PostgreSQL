@@ -21,10 +21,10 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.base.login.spring.mvc")
-@PropertySource("classpath:application.properties.heroku")
+@PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.base.login.spring.mvc.dao.repository")
 public class HibernateConfig {
- 
+
     @Value("${spring.datasource.username}")
     private String userName;
     @Value("${spring.datasource.password}")

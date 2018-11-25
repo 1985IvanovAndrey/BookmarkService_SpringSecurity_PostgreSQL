@@ -31,7 +31,7 @@
 
 <div class="container">
     <form:form method="POST" action="/registration" modelAttribute="userForm" class="form-signin">
-        < class="form-signin-heading"><h2><font color="#fff8dc"> Create your account</font></h2>
+       <h2><font color="#fff8dc"> Create your account</font></h2>
         <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="email" path="username" class="form-control" placeholder="Enter email"
