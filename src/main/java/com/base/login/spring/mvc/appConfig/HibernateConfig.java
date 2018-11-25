@@ -24,7 +24,7 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties.heroku")
 @EnableJpaRepositories("com.base.login.spring.mvc.dao.repository")
 public class HibernateConfig {
-
+ 
     @Value("${spring.datasource.username}")
     private String userName;
     @Value("${spring.datasource.password}")
